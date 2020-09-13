@@ -1,5 +1,4 @@
 import React from 'react'
-import ProjectList from './ProjectList'
 
 // keep the template of ProjectList, making the app more modular
 const ProjectSummary = () => {
