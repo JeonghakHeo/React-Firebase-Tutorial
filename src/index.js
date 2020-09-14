@@ -4,14 +4,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// create store in index.js
+import { createStore } from 'redux'
+import rootReducer from './store/reducers/rootReducer'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+// allows our application to have access to reducer
+import { Provider } from 'react-redx'
+
+// going to create multiple reducers to manage different actions
+// actions for handling project actions; create project, delete project
+// for authentication; signup,login 
+// then combine into a single root reducer
+const store = createStore(rootReducer);
+
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 serviceWorker.unregister();
