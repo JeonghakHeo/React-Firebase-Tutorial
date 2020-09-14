@@ -9,7 +9,7 @@ import { createStore } from 'redux'
 import rootReducer from './store/reducers/rootReducer'
 
 // allows our application to have access to reducer
-import { Provider } from 'react-redx'
+import { Provider } from 'react-redux'
 
 // going to create multiple reducers to manage different actions
 // actions for handling project actions; create project, delete project
