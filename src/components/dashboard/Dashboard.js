@@ -27,7 +27,7 @@ class Dashboard extends Component {
 }
 
 
-// return{} this returend object represents which properties are attached to
+// return{} this returned object represents which properties are attached to
 // the props of this component so then we can access them inside this component
 const mapStateToProps = (state) => {
   return {

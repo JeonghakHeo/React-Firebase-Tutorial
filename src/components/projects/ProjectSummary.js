@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-// receive individual project from ProjectSummary
+// receive individual project from ProjectList
 const ProjectSummary = ({project}) => {
   return(
     <div className="card z-depth-0 project-summary">

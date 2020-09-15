@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // create store in index.js
-// import applyMiddlewarfe from redux for thunk
+// import applyMiddleware from redux for thunk
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './store/reducers/rootReducer'
 
