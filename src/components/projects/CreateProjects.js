@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-  
+import { connect } from 'react-redux'
+import { createProject } from '../../store/actions/projectActions'
 class CreateProjects extends Component {
   state = {
     title: '',
@@ -14,7 +15,8 @@ class CreateProjects extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state)
+    // console.log(this.state);
+    this.props.createProject(this.state)
   }
   render() {
     return (
@@ -38,4 +40,13 @@ class CreateProjects extends Component {
   }
 }
 
-export default CreateProjects
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // project passed down here is from this.state 
+    createProject: (project) => dispatch(createProject(project))
+  }
+}
+
+// first parameter shoulb be mapStateToProps but since we don't have 
+// we just pass null 
+export default connect(null, mapDispatchToProps)(CreateProjects)
