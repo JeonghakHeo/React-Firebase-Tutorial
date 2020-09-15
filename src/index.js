@@ -37,9 +37,9 @@ const store = createStore(rootReducer,
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     // tells where to connect to
     reduxFirestore(fbConfig),
-    reactReduxFirebase(fbConfig)
+    // reactReduxFirebase(fbConfig)
   )
 );
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-serviceWorker.unregister();
+// serviceWorker.unregister();

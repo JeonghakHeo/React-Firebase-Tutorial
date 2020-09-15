@@ -8,8 +8,22 @@ export const createProject = (project) => {
   // with thunk we can return a function
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     // make async call to database
-    // we can pause dispatch and then we can caryy on with dispatch
-    dispatch({ type: 'CREATE_PROJECT', project: project });
+    
+    // create a constant that gives a reference to firestore database
+    const firestore = getFirestore();
+    firestore.collection('projects').add({
+      ...project,
+      authorFirstname: 'Net',
+      authorLastName: 'Ninja',
+      authorId: 12345,
+      createdAt: new Date()
+    }).then(() => {
+      dispatch({ type: 'CREATE_PROJECT', project: project });
+    }).catch((err) => {
+      dispatch({ type: 'CREATE_PROJECT_ERROR', err });
+    })
+    // when async process is done then after that we dispatch action
+    
   }
 };
 
