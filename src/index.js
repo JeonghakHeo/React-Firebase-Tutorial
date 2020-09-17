@@ -26,8 +26,9 @@ import thunk from 'redux-thunk'
 // they enhance store with extra functionalities 
 // with functionalities, we can return a function inside our action creators then interact with database
 
-import { reduxFirestore, getFirestore } from 'redux-firestore'
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore'
+import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
+import firebase from 'firebase/app'
 import fbConfig from './config/fbConfig'
 
 // we want to use both getFirestore and getFirebase so we can access the firebase
@@ -41,5 +42,21 @@ const store = createStore(rootReducer,
   )
 );
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-// serviceWorker.unregister();
+const rrfConfig = {
+  userProfile: 'users',
+}
+const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance,
+
+}
+
+ReactDOM.render(
+<Provider store={store}>
+  <ReactReduxFirebaseProvider {...rrfProps}>
+    <App />
+  </ReactReduxFirebaseProvider>
+    </Provider>, document.getElementById('root'));
+serviceWorker.unregister();

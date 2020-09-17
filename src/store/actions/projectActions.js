@@ -28,5 +28,5 @@ export const createProject = (project) => {
 };
 
 // npm install react-redux-firebase redux-firestore
-// react-redux-firebase provides bidings to the firebase service as a whole
+// react-redux-firebase provides bindings to the firebase service as a whole
 // redux-firestore provides redux bindings for firestore databases
