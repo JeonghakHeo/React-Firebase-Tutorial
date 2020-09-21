@@ -30,6 +30,9 @@ import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-fir
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
 import firebase from 'firebase/app'
 import fbConfig from './config/fbConfig'
+import { useSelector } from 'react-redux'
+import { isLoaded } from 'react-redux-firebase'
+
 
 // we want to use both getFirestore and getFirebase so we can access the firebase
 // or firestore API inside the function in projectAction.js
@@ -38,7 +41,7 @@ const store = createStore(rootReducer,
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     // tells where to connect to
     reduxFirestore(fbConfig),
-    // reactReduxFirebase(fbConfig)
+    // reactReduxFirebase(fbConfig, {attachAuthIsReady: true})
   )
 );
 
@@ -55,9 +58,9 @@ const rrfProps = {
 }
 
 ReactDOM.render(
-<Provider store={store}>
-  <ReactReduxFirebaseProvider {...rrfProps}>
-    <App />
-  </ReactReduxFirebaseProvider>
-    </Provider>, document.getElementById('root'));
-serviceWorker.unregister();
+  <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <App />
+    </ReactReduxFirebaseProvider>
+  </Provider>, document.getElementById('root'));
+  serviceWorker.unregister();    
