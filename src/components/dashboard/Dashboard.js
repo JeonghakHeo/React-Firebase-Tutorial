@@ -12,11 +12,13 @@ import { firestoreConnect } from 'react-redux-firebase'
 // for combining 2 higher order components so we can use
 // both connect and firestoreConnect
 import { compose } from 'redux'
+
+import { Redirect } from 'react-router-dom'
 class Dashboard extends Component {
   render(){
     // console.log(this.props);
-    const { projects } = this.props;
-
+    const { projects, auth } = this.props;
+    if(!auth.uid) return <Redirect to ='/signin' />
     return(
       <div className="dashboard container">
         <div className="row">
@@ -41,7 +43,8 @@ const mapStateToProps = (state) => {
   return {
     // rootReducer -> connect project property in the state 
     // then go to projectReducer.js then connect project: [{id: '1' ...}]
-    projects: state.firestore.ordered.projects
+    projects: state.firestore.ordered.projects,
+    auth: state.firebase.auth
   }
 }
 
