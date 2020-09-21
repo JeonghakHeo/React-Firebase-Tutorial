@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
+// we are just connecting to our reducers not firestore.
+// thus just connect, not firestoreConnect
 import { connect } from 'react-redux'
 const Navbar = () => {
   return(
