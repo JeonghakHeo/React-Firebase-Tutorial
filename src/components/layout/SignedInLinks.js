@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Profiler } from 'react'
 import { NavLink } from 'react-router-dom'
 // to get 'active' class and show when only signed in
 
@@ -14,7 +14,9 @@ const SignedInLinks = (props) => {
       <li><NavLink to='/create'>New Project</NavLink></li>
       {/* if it was onClick={props.signOut() the function will run automatically when the page loads} */}
       <li><a onClick={props.signOut}>Log Out</a></li>
-      <li><NavLink to='/' className='btn btn-floating pink lighten-1'>NN</NavLink></li>
+      <li><NavLink to='/' className='btn btn-floating pink lighten-1'>
+        {props.profile.initials}
+        </NavLink></li>
     </ul>
   )
 }

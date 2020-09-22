@@ -27,10 +27,10 @@ import thunk from 'redux-thunk'
 // with functionalities, we can return a function inside our action creators then interact with database
 
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore'
-import { reactReduxFirebase, ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
+import { ReactReduxFirebase, ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
 import firebase from 'firebase/app'
 import fbConfig from './config/fbConfig'
-import { useSelector } from 'react-redux'
+import { useSelector  } from 'react-redux'
 import { isLoaded } from 'react-redux-firebase'
 
 
@@ -45,31 +45,68 @@ const store = createStore(rootReducer,
   )
 );
 
-const rrfConfig = {
-  userProfile: 'users',
-  useFirestoreForProfile: true
-}
-const rrfProps = {
-  firebase,
-  config: rrfConfig,
-  dispatch: store.dispatch,
-  createFirestoreInstance,
+// const rrfConfig = {
+//   userProfile: 'users',
+//   useFirestoreForProfile: true
+// }
+// const rrfProps = {
+//   firebase,
+//   config: rrfConfig,
+//   dispatch: store.dispatch,
+//   createFirestoreInstance,
 
-}
-
-// function AuthIsLoaded({children}) {
-//   const auth = useSelector(state => state.firebase.auth)
-//   if(!isLoaded(auth)) return<div>Loading screen...</div>;
-//   return children
 // }
 
+// // function AuthIsLoaded({children}) {
+// //   const auth = useSelector(state => state.firebase.auth)
+// //   if(!isLoaded(auth)) return<div>Loading screen...</div>;
+// //   return children
+// // }
 
-    ReactDOM.render(
-      <Provider store={store}>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-          {/* <AuthIsLoaded> */}
-            <App />
-          {/* </AuthIsLoaded> */}
-        </ReactReduxFirebaseProvider>
-      </Provider>, document.getElementById('root'));
-      serviceWorker.unregister();    
+
+//     ReactDOM.render(
+//       <Provider store={store}>
+//         <ReactReduxFirebaseProvider {...rrfProps}>
+//           {/* <AuthIsLoaded> */}
+//             <App />
+//           {/* </AuthIsLoaded> */}
+//         </ReactReduxFirebaseProvider>
+//       </Provider>, document.getElementById('root'));
+//       serviceWorker.unregister();    
+
+const profileSpecificProps = {
+  userProfile: 'users',
+  useFirestoreForProfile: true,
+  enableRedirectHandling: false,
+  resetBeforeLogin: false
+}
+
+
+const rrfProps = {
+  firebase,
+  config: fbConfig,
+  config: profileSpecificProps,
+  dispatch: store.dispatch,
+  createFirestoreInstance
+};
+
+function AuthIsLoaded({ children }) {
+  const auth = useSelector(state => state.firebase.auth)
+  if (!isLoaded(auth)) return <div className="center"> <p>Loading Mario Plan...</p></div>;
+      return children
+}
+
+
+ReactDOM.render(
+  <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <AuthIsLoaded>
+      <App />
+      </AuthIsLoaded>
+      
+    </ReactReduxFirebaseProvider>
+  </Provider>,
+  document.getElementById("root")
+);
+
+serviceWorker.unregister();
