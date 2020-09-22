@@ -27,7 +27,7 @@ import thunk from 'redux-thunk'
 // with functionalities, we can return a function inside our action creators then interact with database
 
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore'
-import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
+import { reactReduxFirebase, ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
 import firebase from 'firebase/app'
 import fbConfig from './config/fbConfig'
 import { useSelector } from 'react-redux'
@@ -57,10 +57,19 @@ const rrfProps = {
 
 }
 
-ReactDOM.render(
-  <Provider store={store}>
-    <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
-    </ReactReduxFirebaseProvider>
-  </Provider>, document.getElementById('root'));
-  serviceWorker.unregister();    
+// function AuthIsLoaded({children}) {
+//   const auth = useSelector(state => state.firebase.auth)
+//   if(!isLoaded(auth)) return<div>Loading screen...</div>;
+//   return children
+// }
+
+
+    ReactDOM.render(
+      <Provider store={store}>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+          {/* <AuthIsLoaded> */}
+            <App />
+          {/* </AuthIsLoaded> */}
+        </ReactReduxFirebaseProvider>
+      </Provider>, document.getElementById('root'));
+      serviceWorker.unregister();    
