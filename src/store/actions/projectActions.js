@@ -11,11 +11,14 @@ export const createProject = (project) => {
     
     // create a constant that gives a reference to firestore database
     const firestore = getFirestore();
+
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
     firestore.collection('projects').add({
       ...project,
-      authorFirstname: 'Net',
-      authorLastName: 'Ninja',
-      authorId: 12345,
+      authorFirstname: profile.firstName,
+      authorLastName: profile.lastName,
+      authorId: authorId,
       createdAt: new Date()
     }).then(() => {
       dispatch({ type: 'CREATE_PROJECT', project: project });

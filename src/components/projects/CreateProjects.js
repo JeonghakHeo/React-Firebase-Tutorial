@@ -18,6 +18,10 @@ class CreateProjects extends Component {
     e.preventDefault();
     // console.log(this.state);
     this.props.createProject(this.state)
+
+    // redirect user when done creating a project
+    // this.props.history.push() from route information from App.js 
+    this.props.history.push('/');
   }
   render() {
     const { auth } = this.props;
